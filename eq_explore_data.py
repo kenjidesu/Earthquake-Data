@@ -6,7 +6,7 @@ from plotly import offline
 
 # Explore the structure of the data
 filename = 'data/raw_eq_data.json'
-with open(filename, encoding='UTF-8') as f:
+with open(filename, 'r', encoding='utf-8') as f:
     all_eq_data = json.load(f)
 
 # Loading the data and displaying it in a format that's easier to read
@@ -25,8 +25,31 @@ for eq_dict in all_eq_dicts:
     lons.append(lon)
     lats.append(lat)
 
+
+mag_size = []
+for mag in mags:
+    try:
+        result = mag * 5
+    except TypeError:
+        print('nope')
+    else:
+        if mag > 0:
+            mag_size.append(result)
+
+
 # Map the earthquakes
-data = [Scattergeo(lon=lons, lat=lats)]
+data = [{
+    'type': 'scattergeo',
+    'lon': lons,
+    'lat': lats,
+    'marker': {
+        'size': mag_size,    
+        'color': mag_size,
+        'colorscale': 'Viridis',
+        'reversescale': True,
+        'colorbar': {'title': 'Magnitude'}
+    },
+}]
 my_layout = Layout(title='Global Earthquakes')
 
 fig = {'data': data, 'layout': my_layout}
