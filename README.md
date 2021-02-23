@@ -14,6 +14,7 @@ A visually appealing and meaningful map of global earthquake activity that also 
 - Customize Marker Size
 - Customize Marker Colors
 - Add Hover Text
+- Refactor
 
 This data comes from one of the United States Geological Survey's earthquake data feeds, which you can find at:
 *https://earthquake.usgs.gov/earthquakes/feed*
